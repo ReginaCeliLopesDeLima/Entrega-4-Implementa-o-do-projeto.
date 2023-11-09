@@ -106,4 +106,23 @@ public class AlunoDAO {
 
         return alunos;
     }
+
+    public static Aluno lerDadosAlunos(int matricula) throws SQLException {
+        Aluno aluno = new Aluno();
+
+        try {
+            BdConnection.ConectarBD();
+            ResultSet resultSet = BdConnection.st.executeQuery("SELECT * FROM TB_ALUNO");
+
+            while (resultSet.next()) {
+                aluno.setMatricula(resultSet.getInt("MATRICULA"));
+                aluno.setNome(resultSet.getString("NOME"));
+            }
+
+            resultSet.close();
+        } catch (Exception e) {
+            System.out.println("Erro ao ler os dados de aluno: " + e.getMessage());
+        }
+        return aluno;
+    }
 }

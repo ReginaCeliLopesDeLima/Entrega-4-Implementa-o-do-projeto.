@@ -1,21 +1,21 @@
 package br.com.model.persistence.dao;
 
-import br.com.model.persistence.AgendamentoAula;
-import br.com.model.persistence.Aluno;
-import br.com.model.persistence.Aula;
-import br.com.model.persistence.BdConnection;
+import br.com.controller.AngendamentoAulaResponse;
+import br.com.model.persistence.*;
+import br.com.model.utils.EntradaDados;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class AgendamentoAulaDAO {
 
     public static void agendarAula(int idAula, int matriculaAluno) throws SQLException {
 
         try {
-            Aula aula = AulaDAO.lerDadosAulas(idAula);
+            Aula aula = AulaDAO.lerDadosAula(idAula);
 
             AgendamentoAula agendamentoAula = new AgendamentoAula();
             agendamentoAula.setDiaHorarioAgendado(aula.getDiaHorarioAula());
@@ -35,21 +35,32 @@ public class AgendamentoAulaDAO {
         }
     }
 
-    public List<AgendamentoAula> mostrarAgendamentos() throws SQLException {
-        List<AgendamentoAula> agendamentos = new ArrayList<>();
+    public void mostrarAgendamentos() throws SQLException {
+        AngendamentoAulaResponse angendamentoAulaResponse = new AngendamentoAulaResponse();
+        int matriculaAluno = EntradaDados.mostrarAgendamentoAluno();
 
         try {
             BdConnection.ConectarBD();
-            ResultSet resultSet = BdConnection.st.executeQuery("SELECT DIA_HORARIO_AGENDADO, NOME_AULA " +
-                    "FROM TB_AGENDAMENTO_AULA");
+            ResultSet resultSet = BdConnection.st.executeQuery("SELECT A.MATRICULA, A.NOME, B.DIA_HORARIO_AGENDADO, C.NOME_AULA, D.NOME_INSTRUTOR " +
+                                                                    "FROM TB_ALUNO A " +
+                                                                    "JOIN TB_AGENDAMENTO_AULA B ON A.MATRICULA = B.MATRICULA_ALUNO " +
+                                                                    "JOIN TB_AULA C ON C.ID_AULA = B.ID_AULA " +
+                                                                    "JOIN TB_INSTRUTOR D ON D.MATRICULA_INSTRUTOR = C.MATRICULA_INSTRUTOR " +
+                                                                    "WHERE A.MATRICULA = " + matriculaAluno);
 
             while (resultSet.next()) {
-                AgendamentoAula agendamentoAula = new AgendamentoAula();
-                agendamentoAula.setDiaHorarioAgendado(resultSet.getTimestamp("DIA_HORARIO_AGENDADO"));
-                agendamentos.add(agendamentoAula);
+                angendamentoAulaResponse.setMatriculaAluno((resultSet.getInt("MATRICULA")));
+                angendamentoAulaResponse.setNomeAluno(resultSet.getString("NOME"));
+                angendamentoAulaResponse.setDiaHorarioAgendado(resultSet.getTimestamp("DIA_HORARIO_AGENDADO"));
+                angendamentoAulaResponse.setAula(resultSet.getString("NOME_AULA"));
+                angendamentoAulaResponse.setNomeInstrutor((resultSet.getString("NOME_INSTRUTOR")));
 
             }
-            System.out.println(agendamentos);
+            if(angendamentoAulaResponse.getDiaHorarioAgendado() == null){
+                System.out.println("Este aluno aluno não possui aulas agendas.");
+            }else{
+                System.out.println(angendamentoAulaResponse);
+            }
 
             resultSet.close();
         } catch (Exception e) {
@@ -57,8 +68,6 @@ public class AgendamentoAulaDAO {
         } finally {
             BdConnection.DesconectarBD();
         }
-        return agendamentos;
+
     }
 }
-
-

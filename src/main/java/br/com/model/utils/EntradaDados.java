@@ -1,14 +1,10 @@
 package br.com.model.utils;
 
-import br.com.model.dto.AgendamentoAulaDTO;
 import br.com.model.dto.AlunoDTO;
 import br.com.model.dto.AulaDTO;
 import br.com.model.dto.InstrutorDTO;
 import br.com.model.persistence.Aluno;
 import br.com.model.persistence.Aula;
-import br.com.model.persistence.BdConnection;
-import br.com.model.persistence.Instrutor;
-import br.com.model.persistence.dao.AgendamentoAulaDAO;
 import br.com.model.persistence.dao.AlunoDAO;
 import br.com.model.persistence.dao.AulaDAO;
 
@@ -246,9 +242,6 @@ public class EntradaDados {
             sc.close();
         }
     }
-    public static void lerDadosAula(){
-        System.out.println("Aqui esttá todos os dados da aula");
-    }
 
     public static void agendarAulas() throws SQLException {
 
@@ -258,7 +251,7 @@ public class EntradaDados {
 
         System.out.println("Qual aula deseja agendar ?");
 
-        for(int i=0; i <= aulas.size() -1; i++){
+        for (int i = 0; i <= aulas.size() - 1; i++) {
             System.out.println("[" + aulas.get(i).getIdAula() + "] " + aulas.get(i).getNomeAula());
         }
         idAula = sc.nextInt();
@@ -268,19 +261,23 @@ public class EntradaDados {
 
         boolean alunoEncontrado = false;
 
-        for(int i=0; i <= alunos.size() -1; i++){
-            if(alunos.get(i).getMatricula() == matriculaAluno){
+        for (int i = 0; i <= alunos.size() - 1; i++) {
+            if (alunos.get(i).getMatricula() == matriculaAluno) {
                 alunoEncontrado = true;
             }
         }
 
-        if(!alunoEncontrado){
+        if (!alunoEncontrado) {
             System.out.println("Não foi possível agendar aula, pois esse aluno não está cadastrado!");
         }
+    }
+    public static int mostrarAgendamentoAluno(){
+        System.out.println("Digite a matricula do aluno: ");
+        Scanner sc = new Scanner(System.in);
+        int matriculaAluno = sc.nextInt();
 
+        return matriculaAluno;
+    }
     }
 
-    public static void mostrarAgendamentos(){
-        System.out.println("Aqui está todos os agendamentos");
-    }
-}
+

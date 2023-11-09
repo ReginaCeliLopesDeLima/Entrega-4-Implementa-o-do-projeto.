@@ -12,6 +12,16 @@ public class AgendamentoAula {
 
     private int matriculaAluno;
 
+    public Aluno getAluno() {
+        return aluno;
+    }
+
+    public void setAluno(Aluno aluno) {
+        this.aluno = aluno;
+    }
+
+    private Aluno aluno;
+
     public int getIdAgendamento() {
         return idAgendamento;
     }
@@ -44,9 +54,12 @@ public class AgendamentoAula {
         this.matriculaAluno = matriculaAluno;
     }
 
+    //Metodo construtor
+
+
     @Override
     public String toString() {
-        return "Agendamento aula " + "\n" +
+        return "Agendamentos " + "\n" +
                 "Dia horario agendado: " + diaHorarioAgendado;
     }
 }

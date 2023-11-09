@@ -1,8 +1,6 @@
 package br.com.model.persistence.dao;
 
-import br.com.model.dto.AlunoDTO;
 import br.com.model.dto.AulaDTO;
-import br.com.model.persistence.Aluno;
 import br.com.model.persistence.Aula;
 import br.com.model.persistence.BdConnection;
 
@@ -104,7 +102,7 @@ public static void atualizarDadosAula(int opcao) throws SQLException {
         return aulas;
     }
 
-    public static Aula lerDadosAulas(int idAula) throws SQLException {
+    public static Aula lerDadosAula(int idAula) throws SQLException {
         Aula aula = new Aula();
 
         try {

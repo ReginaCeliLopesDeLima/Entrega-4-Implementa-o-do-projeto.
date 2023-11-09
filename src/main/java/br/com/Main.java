@@ -59,10 +59,12 @@ public class Main {
 		//AGENDAMENTO AULA
 		AgendamentoAulaDAO agendamentoAulaDAO = new AgendamentoAulaDAO();
 
-		EntradaDados.agendarAulas();
+		//EntradaDados.agendarAulas();
 
-		agendamentoAulaDAO.agendarAula(EntradaDados.idAula, EntradaDados.matriculaAluno);
-		//agendamentoAulaDAO.mostrarAgendamentos();
+		//agendamentoAulaDAO.agendarAula(EntradaDados.idAula, EntradaDados.matriculaAluno);
+
+		//EntradaDados.mostrarAgendamentos();
+		agendamentoAulaDAO.mostrarAgendamentos();
 
 	}
 
