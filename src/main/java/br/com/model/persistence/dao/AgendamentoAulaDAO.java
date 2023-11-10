@@ -2,13 +2,10 @@ package br.com.model.persistence.dao;
 
 import br.com.controller.AngendamentoAulaResponse;
 import br.com.model.persistence.*;
-import br.com.model.utils.EntradaDados;
+import br.com.view.EntradaDados;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
 
 public class AgendamentoAulaDAO {
 

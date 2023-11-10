@@ -1,4 +1,4 @@
-package br.com.model.utils;
+package br.com.view;
 
 import br.com.model.dto.AlunoDTO;
 import br.com.model.dto.AulaDTO;

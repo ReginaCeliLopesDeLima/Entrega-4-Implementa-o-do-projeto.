@@ -1,16 +1,11 @@
 package br.com;
 
-import br.com.model.dto.AlunoDTO;
-import br.com.model.persistence.AgendamentoAula;
 import br.com.model.persistence.dao.AgendamentoAulaDAO;
 import br.com.model.persistence.dao.AlunoDAO;
 import br.com.model.persistence.dao.AulaDAO;
 import br.com.model.persistence.dao.InstrutorDAO;
-import br.com.model.utils.EntradaDados;
 
 import java.sql.SQLException;
-
-import static br.com.model.utils.EntradaDados.opcao;
 
 public class Main {
 
